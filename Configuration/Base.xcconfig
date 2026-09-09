@@ -1,0 +1,13 @@
+// Replace these values once, then select your signing team in Xcode.
+PLANS_BUNDLE_PREFIX = com.example
+PLANS_APP_GROUP = group.com.example.plans
+PLANS_REFRESH_TASK = com.example.plans.refresh
+
+IPHONEOS_DEPLOYMENT_TARGET = 17.0
+SWIFT_VERSION = 5.0
+CODE_SIGN_STYLE = Automatic
+CURRENT_PROJECT_VERSION = 1
+MARKETING_VERSION = 1.0
+ENABLE_USER_SCRIPT_SANDBOXING = YES
+CLANG_ENABLE_MODULES = YES
+SWIFT_EMIT_LOC_STRINGS = YES

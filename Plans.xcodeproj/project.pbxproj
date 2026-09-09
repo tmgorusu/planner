@@ -1,0 +1,837 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 60;
+	objects = {
+		9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			name = Base.xcconfig;
+			path = Base.xcconfig;
+			sourceTree = "<group>";
+		};
+		8C7191863E499AE53043C806 /* PrivacyInfo.xcprivacy */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = PrivacyInfo.xcprivacy;
+			path = PrivacyInfo.xcprivacy;
+			sourceTree = "<group>";
+		};
+		DB4524C3CAD875E3C0A0D2FD /* PlansShared.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = PlansShared.swift;
+			path = Sources/PlansShared/PlansShared.swift;
+			sourceTree = "<group>";
+		};
+		B73A13A5CB4C712D31DAA421 /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			name = Info.plist;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		01E9CF0DCF593E043B79C885 /* PlansApp.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = PlansApp.swift;
+			path = PlansApp.swift;
+			sourceTree = "<group>";
+		};
+		A31ACFDB123612CA6B3A50FD /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			name = Info.plist;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		3DDAFE3B3617BA47674A37C2 /* PlansApp.entitlements */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.entitlements;
+			name = PlansApp.entitlements;
+			path = PlansApp.entitlements;
+			sourceTree = "<group>";
+		};
+		56D00B261B77E616283683E4 /* PlansWidget.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = PlansWidget.swift;
+			path = PlansWidget.swift;
+			sourceTree = "<group>";
+		};
+		93E4B068C3DC5818B42C14F3 /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			name = Info.plist;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		591D270947B19461E2C966E6 /* PlansWidget.entitlements */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.entitlements;
+			name = PlansWidget.entitlements;
+			path = PlansWidget.entitlements;
+			sourceTree = "<group>";
+		};
+		6953F26B7791EDD14EC29BDC /* ShareExtension.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = ShareExtension.swift;
+			path = ShareExtension.swift;
+			sourceTree = "<group>";
+		};
+		D05F414C2002DF44004A2D6D /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			name = Info.plist;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		98C82FE6F0064576F6C9B759 /* PlansShare.entitlements */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.entitlements;
+			name = PlansShare.entitlements;
+			path = PlansShare.entitlements;
+			sourceTree = "<group>";
+		};
+		19AED334D50A7EBAAE2D022D /* PlansSharedTests.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = PlansSharedTests.swift;
+			path = PlansSharedTests.swift;
+			sourceTree = "<group>";
+		};
+		4803B7D2E9EF42E311B9D089 /* PlansShared.framework */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.framework;
+			includeInIndex = 0;
+			path = PlansShared.framework;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		845F65209D19F1E91A3C573D /* Plans.app */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			path = Plans.app;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0CACA06847DB2DB0E73BD413 /* PlansWidgetExtension.appex */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.app-extension;
+			includeInIndex = 0;
+			path = PlansWidgetExtension.appex;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		383899B06CE3D7F03922E310 /* PlansShareExtension.appex */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.app-extension;
+			includeInIndex = 0;
+			path = PlansShareExtension.appex;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9FEED0499F36FF4A8531E2EC /* PlansTests.xctest */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			path = PlansTests.xctest;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9DFEDF2338A14CB2761FC2F1 /* PlansShared.swift in Sources */ = {
+			isa = PBXBuildFile;
+			fileRef = DB4524C3CAD875E3C0A0D2FD /* PlansShared.swift */;
+		};
+		5BA2C8A4663D0E2E13DC01F8 /* PlansApp.swift in Sources */ = {
+			isa = PBXBuildFile;
+			fileRef = 01E9CF0DCF593E043B79C885 /* PlansApp.swift */;
+		};
+		ED64AE3972143DE649CF740B /* PlansWidget.swift in Sources */ = {
+			isa = PBXBuildFile;
+			fileRef = 56D00B261B77E616283683E4 /* PlansWidget.swift */;
+		};
+		5827A0FD463D6A3C1BA8DA2F /* ShareExtension.swift in Sources */ = {
+			isa = PBXBuildFile;
+			fileRef = 6953F26B7791EDD14EC29BDC /* ShareExtension.swift */;
+		};
+		EB7E17133C7813DB5DC39BE8 /* PlansSharedTests.swift in Sources */ = {
+			isa = PBXBuildFile;
+			fileRef = 19AED334D50A7EBAAE2D022D /* PlansSharedTests.swift */;
+		};
+		CAD6DC963A43AC6136E75DAD /* PlansShared.framework in Frameworks */ = {
+			isa = PBXBuildFile;
+			fileRef = 4803B7D2E9EF42E311B9D089 /* PlansShared.framework */;
+		};
+		175F3720121C72A90F04A0D3 /* PlansShared.framework in Frameworks */ = {
+			isa = PBXBuildFile;
+			fileRef = 4803B7D2E9EF42E311B9D089 /* PlansShared.framework */;
+		};
+		5FC2A534EF4F5D3530602BF4 /* PlansShared.framework in Frameworks */ = {
+			isa = PBXBuildFile;
+			fileRef = 4803B7D2E9EF42E311B9D089 /* PlansShared.framework */;
+		};
+		18C38C1A94696B2A70A72DED /* PlansShared.framework in Frameworks */ = {
+			isa = PBXBuildFile;
+			fileRef = 4803B7D2E9EF42E311B9D089 /* PlansShared.framework */;
+		};
+		E424F69ED8739E2258EA5681 /* PrivacyInfo.xcprivacy in Resources */ = {
+			isa = PBXBuildFile;
+			fileRef = 8C7191863E499AE53043C806 /* PrivacyInfo.xcprivacy */;
+		};
+		3A4C72721F260D388664A31E /* PrivacyInfo.xcprivacy in Resources */ = {
+			isa = PBXBuildFile;
+			fileRef = 8C7191863E499AE53043C806 /* PrivacyInfo.xcprivacy */;
+		};
+		F3FA7061DB9CA7081A1F1269 /* PrivacyInfo.xcprivacy in Resources */ = {
+			isa = PBXBuildFile;
+			fileRef = 8C7191863E499AE53043C806 /* PrivacyInfo.xcprivacy */;
+		};
+		86B0467CEB93573F624F4337 /* PlansWidgetExtension.appex in Embed App Extensions */ = {
+			isa = PBXBuildFile;
+			fileRef = 0CACA06847DB2DB0E73BD413 /* PlansWidgetExtension.appex */;
+			settings = {ATTRIBUTES = (RemoveHeadersOnCopy, CodeSignOnCopy, ); };
+		};
+		DF3F26E5F8D73BB1E6210CD8 /* PlansShareExtension.appex in Embed App Extensions */ = {
+			isa = PBXBuildFile;
+			fileRef = 383899B06CE3D7F03922E310 /* PlansShareExtension.appex */;
+			settings = {ATTRIBUTES = (RemoveHeadersOnCopy, CodeSignOnCopy, ); };
+		};
+		AB48CFA305015276AB5620D4 /* Main Group */ = {
+			isa = PBXGroup;
+			children = (
+					9F9F15F4D1CDC5E1611DED8C /* Configuration */,
+					239D4B6E1360302B8ED4C8C0 /* PlansShared */,
+					C8A1E76B6CA46DDC89E29CCD /* PlansApp */,
+					BB8CE023B322DD298DE2B1AB /* PlansWidgetExtension */,
+					5941A542D61761126F1E539B /* PlansShareExtension */,
+					8C35799A97AD3FA99FA2EDFE /* PlansTests */,
+					692092DE1C1C8624E142B71D /* Products */,
+				);
+			sourceTree = "<group>";
+		};
+		9F9F15F4D1CDC5E1611DED8C /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+					9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */,
+					8C7191863E499AE53043C806 /* PrivacyInfo.xcprivacy */,
+				);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		239D4B6E1360302B8ED4C8C0 /* PlansShared */ = {
+			isa = PBXGroup;
+			children = (
+					DB4524C3CAD875E3C0A0D2FD /* PlansShared.swift */,
+					B73A13A5CB4C712D31DAA421 /* Info.plist */,
+				);
+			path = PlansShared;
+			sourceTree = "<group>";
+		};
+		C8A1E76B6CA46DDC89E29CCD /* PlansApp */ = {
+			isa = PBXGroup;
+			children = (
+					01E9CF0DCF593E043B79C885 /* PlansApp.swift */,
+					A31ACFDB123612CA6B3A50FD /* Info.plist */,
+					3DDAFE3B3617BA47674A37C2 /* PlansApp.entitlements */,
+				);
+			path = PlansApp;
+			sourceTree = "<group>";
+		};
+		BB8CE023B322DD298DE2B1AB /* PlansWidgetExtension */ = {
+			isa = PBXGroup;
+			children = (
+					56D00B261B77E616283683E4 /* PlansWidget.swift */,
+					93E4B068C3DC5818B42C14F3 /* Info.plist */,
+					591D270947B19461E2C966E6 /* PlansWidget.entitlements */,
+				);
+			path = PlansWidgetExtension;
+			sourceTree = "<group>";
+		};
+		5941A542D61761126F1E539B /* PlansShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+					6953F26B7791EDD14EC29BDC /* ShareExtension.swift */,
+					D05F414C2002DF44004A2D6D /* Info.plist */,
+					98C82FE6F0064576F6C9B759 /* PlansShare.entitlements */,
+				);
+			path = PlansShareExtension;
+			sourceTree = "<group>";
+		};
+		8C35799A97AD3FA99FA2EDFE /* PlansTests */ = {
+			isa = PBXGroup;
+			children = (
+					19AED334D50A7EBAAE2D022D /* PlansSharedTests.swift */,
+				);
+			path = PlansTests;
+			sourceTree = "<group>";
+		};
+		692092DE1C1C8624E142B71D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+					4803B7D2E9EF42E311B9D089 /* PlansShared.framework */,
+					845F65209D19F1E91A3C573D /* Plans.app */,
+					0CACA06847DB2DB0E73BD413 /* PlansWidgetExtension.appex */,
+					383899B06CE3D7F03922E310 /* PlansShareExtension.appex */,
+					9FEED0499F36FF4A8531E2EC /* PlansTests.xctest */,
+				);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3B227A33D44916F3B1F2B664 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					9DFEDF2338A14CB2761FC2F1 /* PlansShared.swift in Sources */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28A91C6797F516035C693AE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EACE6D0C6572342AA07C8B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68794D95D50DF8ED5158D413 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					5BA2C8A4663D0E2E13DC01F8 /* PlansApp.swift in Sources */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF8D21E9E84F4DF4F2CFEE1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					CAD6DC963A43AC6136E75DAD /* PlansShared.framework in Frameworks */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		253694B87BCB5FB6ECA0DC84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					E424F69ED8739E2258EA5681 /* PrivacyInfo.xcprivacy in Resources */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DF076486C398857149CA5C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					ED64AE3972143DE649CF740B /* PlansWidget.swift in Sources */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		994750D2B75DF8CB5733446D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					175F3720121C72A90F04A0D3 /* PlansShared.framework in Frameworks */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D903E3F940CCEC8657CB75F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					3A4C72721F260D388664A31E /* PrivacyInfo.xcprivacy in Resources */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01B072689B1F6D1642528F48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					5827A0FD463D6A3C1BA8DA2F /* ShareExtension.swift in Sources */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ECB4C14DF67901459EE247D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					5FC2A534EF4F5D3530602BF4 /* PlansShared.framework in Frameworks */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2914078735662B06C9263679 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					F3FA7061DB9CA7081A1F1269 /* PrivacyInfo.xcprivacy in Resources */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FCE40ED97F11DB24B3D493D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					EB7E17133C7813DB5DC39BE8 /* PlansSharedTests.swift in Sources */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B600A77575E0C26C2541FEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					18C38C1A94696B2A70A72DED /* PlansShared.framework in Frameworks */,
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A52B986283183FE44E9F2634 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+
+				);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31952A50273CD5AB45F54013 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+					86B0467CEB93573F624F4337 /* PlansWidgetExtension.appex in Embed App Extensions */,
+					DF3F26E5F8D73BB1E6210CD8 /* PlansShareExtension.appex in Embed App Extensions */,
+				);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA22DC01852DE917D0946096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F47787C629C40802B463D219;
+			remoteInfo = PlansShared;
+		};
+		537902F1E67044ADA86B9F2E /* PBXTargetDependency PlansShared */ = {
+			isa = PBXTargetDependency;
+			target = F47787C629C40802B463D219 /* PlansShared */;
+			targetProxy = DA22DC01852DE917D0946096 /* PBXContainerItemProxy */;
+		};
+		F90F052E26361B3EDE3CAEAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B47272CADB78CB57191AA815;
+			remoteInfo = PlansWidgetExtension;
+		};
+		9CB4FEB02A2D363A1A088BC9 /* PBXTargetDependency PlansWidgetExtension */ = {
+			isa = PBXTargetDependency;
+			target = B47272CADB78CB57191AA815 /* PlansWidgetExtension */;
+			targetProxy = F90F052E26361B3EDE3CAEAD /* PBXContainerItemProxy */;
+		};
+		252D905BD468CB821841A7D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F18DA5DCDA54FE6E8FB20249;
+			remoteInfo = PlansShareExtension;
+		};
+		94E5868EF5FE5F0DE5495DD6 /* PBXTargetDependency PlansShareExtension */ = {
+			isa = PBXTargetDependency;
+			target = F18DA5DCDA54FE6E8FB20249 /* PlansShareExtension */;
+			targetProxy = 252D905BD468CB821841A7D6 /* PBXContainerItemProxy */;
+		};
+		5D0EBF85927D839A6B8BBCE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F47787C629C40802B463D219;
+			remoteInfo = PlansShared;
+		};
+		42BF0C822AB34C86765CAE0C /* PBXTargetDependency PlansShared */ = {
+			isa = PBXTargetDependency;
+			target = F47787C629C40802B463D219 /* PlansShared */;
+			targetProxy = 5D0EBF85927D839A6B8BBCE2 /* PBXContainerItemProxy */;
+		};
+		6592007714DCB8EE63F10528 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F47787C629C40802B463D219;
+			remoteInfo = PlansShared;
+		};
+		E5AD17A4191D2BA0C6AD3D51 /* PBXTargetDependency PlansShared */ = {
+			isa = PBXTargetDependency;
+			target = F47787C629C40802B463D219 /* PlansShared */;
+			targetProxy = 6592007714DCB8EE63F10528 /* PBXContainerItemProxy */;
+		};
+		C2AF2AFF9021E3FC91156BFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F47787C629C40802B463D219;
+			remoteInfo = PlansShared;
+		};
+		B738C34517A2BF39D25CB20A /* PBXTargetDependency PlansShared */ = {
+			isa = PBXTargetDependency;
+			target = F47787C629C40802B463D219 /* PlansShared */;
+			targetProxy = C2AF2AFF9021E3FC91156BFC /* PBXContainerItemProxy */;
+		};
+		F47787C629C40802B463D219 /* PlansShared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9A4FF4DECD02E110A203AD7 /* Build configuration list for PBXNativeTarget "PlansShared" */;
+			buildPhases = (
+					3B227A33D44916F3B1F2B664 /* Sources */,
+					28A91C6797F516035C693AE6 /* Frameworks */,
+					7EACE6D0C6572342AA07C8B2 /* Resources */,
+				);
+			buildRules = ();
+			dependencies = (
+
+				);
+			name = PlansShared;
+			productName = PlansShared;
+			productReference = 4803B7D2E9EF42E311B9D089 /* PlansShared.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B902F7C2327297FC583709E1 /* Plans */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A60603318F4F2D479103030 /* Build configuration list for PBXNativeTarget "Plans" */;
+			buildPhases = (
+					68794D95D50DF8ED5158D413 /* Sources */,
+					BF8D21E9E84F4DF4F2CFEE1E /* Frameworks */,
+					253694B87BCB5FB6ECA0DC84 /* Resources */,
+					31952A50273CD5AB45F54013 /* Embed */,
+				);
+			buildRules = ();
+			dependencies = (
+					537902F1E67044ADA86B9F2E /* PBXTargetDependency */,
+					9CB4FEB02A2D363A1A088BC9 /* PBXTargetDependency */,
+					94E5868EF5FE5F0DE5495DD6 /* PBXTargetDependency */,
+				);
+			name = Plans;
+			productName = Plans;
+			productReference = 845F65209D19F1E91A3C573D /* Plans.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B47272CADB78CB57191AA815 /* PlansWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 006A55661A6E697ABBAF1E1D /* Build configuration list for PBXNativeTarget "PlansWidgetExtension" */;
+			buildPhases = (
+					7DF076486C398857149CA5C5 /* Sources */,
+					994750D2B75DF8CB5733446D /* Frameworks */,
+					9D903E3F940CCEC8657CB75F /* Resources */,
+				);
+			buildRules = ();
+			dependencies = (
+					42BF0C822AB34C86765CAE0C /* PBXTargetDependency */,
+				);
+			name = PlansWidgetExtension;
+			productName = PlansWidgetExtension;
+			productReference = 0CACA06847DB2DB0E73BD413 /* PlansWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F18DA5DCDA54FE6E8FB20249 /* PlansShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40301FC0ED608BD71D9816AD /* Build configuration list for PBXNativeTarget "PlansShareExtension" */;
+			buildPhases = (
+					01B072689B1F6D1642528F48 /* Sources */,
+					2ECB4C14DF67901459EE247D /* Frameworks */,
+					2914078735662B06C9263679 /* Resources */,
+				);
+			buildRules = ();
+			dependencies = (
+					E5AD17A4191D2BA0C6AD3D51 /* PBXTargetDependency */,
+				);
+			name = PlansShareExtension;
+			productName = PlansShareExtension;
+			productReference = 383899B06CE3D7F03922E310 /* PlansShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		6A1E24F1D627678E5C8106C0 /* PlansTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7C210B295701AD5D084AF162 /* Build configuration list for PBXNativeTarget "PlansTests" */;
+			buildPhases = (
+					4FCE40ED97F11DB24B3D493D /* Sources */,
+					4B600A77575E0C26C2541FEE /* Frameworks */,
+					A52B986283183FE44E9F2634 /* Resources */,
+				);
+			buildRules = ();
+			dependencies = (
+					B738C34517A2BF39D25CB20A /* PBXTargetDependency */,
+				);
+			name = PlansTests;
+			productName = PlansTests;
+			productReference = 9FEED0499F36FF4A8531E2EC /* PlansTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		41F4B1CEEACC5CF5F3860887 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+			};
+			name = Debug;
+		};
+		96B9C483016A0F8F6F2C8217 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		F6BC2DEC3900CFA0D10B950D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				INFOPLIST_FILE = PlansShared/Info.plist;
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans.shared";
+				PRODUCT_NAME = PlansShared;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		42F1B3A21C8207B60B7095D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				INFOPLIST_FILE = PlansShared/Info.plist;
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans.shared";
+				PRODUCT_NAME = PlansShared;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8931D22D5340A79AD672B19B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PlansApp/PlansApp.entitlements;
+				INFOPLIST_FILE = PlansApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans";
+				PRODUCT_NAME = Plans;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCF409BC55A1B31258718FD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PlansApp/PlansApp.entitlements;
+				INFOPLIST_FILE = PlansApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans";
+				PRODUCT_NAME = Plans;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		36EE5CC53E9BD7C669A55DF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = PlansWidgetExtension/PlansWidget.entitlements;
+				INFOPLIST_FILE = PlansWidgetExtension/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans.widget";
+				PRODUCT_NAME = PlansWidgetExtension;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8511674C60C3300ED5DE1221 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = PlansWidgetExtension/PlansWidget.entitlements;
+				INFOPLIST_FILE = PlansWidgetExtension/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans.widget";
+				PRODUCT_NAME = PlansWidgetExtension;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6279D9D275D5F09D945D7EB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = PlansShareExtension/PlansShare.entitlements;
+				INFOPLIST_FILE = PlansShareExtension/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans.share";
+				PRODUCT_NAME = PlansShareExtension;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F1E395168484494216F0903C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = PlansShareExtension/PlansShare.entitlements;
+				INFOPLIST_FILE = PlansShareExtension/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans.share";
+				PRODUCT_NAME = PlansShareExtension;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6649D2CEEA1D031C9DAC60DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans.tests";
+				PRODUCT_NAME = PlansTests;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		322E770679E22DCE997AB5EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9144DCE9CEDBB7A7FF2210C7 /* Base.xcconfig */;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLANS_BUNDLE_PREFIX).plans.tests";
+				PRODUCT_NAME = PlansTests;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		99DE79F146C1665D0B462638 /* Build configuration list for PBXProject */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+					41F4B1CEEACC5CF5F3860887 /* Debug */,
+					96B9C483016A0F8F6F2C8217 /* Release */,
+				);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9A4FF4DECD02E110A203AD7 /* Build configuration list for PBXNativeTarget */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+					F6BC2DEC3900CFA0D10B950D /* Debug */,
+					42F1B3A21C8207B60B7095D0 /* Release */,
+				);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A60603318F4F2D479103030 /* Build configuration list for PBXNativeTarget */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+					8931D22D5340A79AD672B19B /* Debug */,
+					FCF409BC55A1B31258718FD8 /* Release */,
+				);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		006A55661A6E697ABBAF1E1D /* Build configuration list for PBXNativeTarget */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+					36EE5CC53E9BD7C669A55DF5 /* Debug */,
+					8511674C60C3300ED5DE1221 /* Release */,
+				);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40301FC0ED608BD71D9816AD /* Build configuration list for PBXNativeTarget */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+					6279D9D275D5F09D945D7EB9 /* Debug */,
+					F1E395168484494216F0903C /* Release */,
+				);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7C210B295701AD5D084AF162 /* Build configuration list for PBXNativeTarget */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+					6649D2CEEA1D031C9DAC60DC /* Debug */,
+					322E770679E22DCE997AB5EA /* Release */,
+				);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		98F54143AB4E86B28C3AFEE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					F47787C629C40802B463D219 = { CreatedOnToolsVersion = 15.4; ProvisioningStyle = Automatic; };
+					B902F7C2327297FC583709E1 = { CreatedOnToolsVersion = 15.4; ProvisioningStyle = Automatic; };
+					B47272CADB78CB57191AA815 = { CreatedOnToolsVersion = 15.4; ProvisioningStyle = Automatic; };
+					F18DA5DCDA54FE6E8FB20249 = { CreatedOnToolsVersion = 15.4; ProvisioningStyle = Automatic; };
+					6A1E24F1D627678E5C8106C0 = { CreatedOnToolsVersion = 15.4; ProvisioningStyle = Automatic; };
+				};
+			};
+			buildConfigurationList = 99DE79F146C1665D0B462638 /* Build configuration list for PBXProject */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base, );
+			mainGroup = AB48CFA305015276AB5620D4 /* Main Group */;
+			productRefGroup = 692092DE1C1C8624E142B71D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+					F47787C629C40802B463D219 /* PlansShared */,
+					B902F7C2327297FC583709E1 /* Plans */,
+					B47272CADB78CB57191AA815 /* PlansWidgetExtension */,
+					F18DA5DCDA54FE6E8FB20249 /* PlansShareExtension */,
+					6A1E24F1D627678E5C8106C0 /* PlansTests */,
+				);
+		};
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+}
