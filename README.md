@@ -4,6 +4,13 @@ Wear leveling for utility-dispatched home batteries. A utility calls the fleet f
 
 The fleet in this plan is synthetic. The ERCOT sample is real public data. There is no Base telemetry here.
 
+## Plan
+
+| File | What it is |
+| --- | --- |
+| [BUILD_PLAN.md](BUILD_PLAN.md) | Full council plan: decisions, milestones, task cards, cut list, video outline. |
+| [tasks.json](tasks.json) | The same task cards as JSON. |
+
 ## Specs
 
 | Spec | Who it is for |
