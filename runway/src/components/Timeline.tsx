@@ -58,7 +58,7 @@ export function Timeline({
             key={w.id}
             type="button"
             className="weak-mark"
-            title={w.label}
+            title={w.challenge}
             style={{
               left: `${(w.start / duration) * 100}%`,
               width: `${((w.end - w.start) / duration) * 100}%`,

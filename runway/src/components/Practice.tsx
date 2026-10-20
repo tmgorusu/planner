@@ -17,6 +17,7 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
   const [mirrored, setMirrored] = useState(true)
   const [rate, setRate] = useState(0.5)
   const [loops, setLoops] = useState(0)
+  const poseOnly = Boolean(videos.poseOnly)
 
   useEffect(() => {
     const c = coachRef.current
@@ -25,6 +26,7 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
     c.currentTime = moment.start
     s.currentTime = moment.start
     setTime(moment.start)
+    setLoops(0)
   }, [moment])
 
   useEffect(() => {
@@ -55,8 +57,8 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
   return (
     <div className="practice-stage">
       <div className="topbar">
-        <h1 className="brand" style={{ fontSize: '1.4rem' }}>
-          Practice
+        <h1 className="brand" style={{ fontSize: '1.35rem' }}>
+          Challenge
         </h1>
         <button type="button" className="btn btn-ghost" onClick={onBack}>
           Back
@@ -64,7 +66,8 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
       </div>
 
       <section className="panel">
-        <h2>{moment.label}</h2>
+        <p className="eyebrow">Focus beat · +{moment.xp} XP</p>
+        <h2>{moment.challenge}</h2>
         <p className="note">{moment.tip}</p>
       </section>
 
@@ -72,10 +75,11 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
         <VideoPane
           src={videos.coachUrl}
           label="Coach"
-          color="#f0b429"
+          color="#ff5a7a"
           poses={analysis.coachPoses}
           currentTime={time}
           mirrored={mirrored}
+          poseOnly={poseOnly}
           videoRef={coachRef}
           playbackRate={rate}
           onTimeUpdate={(t) => {
@@ -88,10 +92,11 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
         <VideoPane
           src={videos.studentUrl}
           label="You"
-          color="#2dd4a8"
+          color="#3ee0c5"
           poses={analysis.studentPoses}
           currentTime={time}
           mirrored={mirrored}
+          poseOnly={poseOnly}
           videoRef={studentRef}
           playbackRate={rate}
         />
@@ -99,7 +104,7 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
 
       <div className="controls">
         <button type="button" className="btn btn-primary" onClick={playLoop}>
-          Loop segment
+          Loop it
         </button>
         <button
           type="button"
@@ -113,14 +118,15 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
           className="btn btn-ghost"
           onClick={() => setRate((r) => (r === 0.5 ? 0.75 : r === 0.75 ? 1 : 0.5))}
         >
-          {rate}× speed
+          {rate}×
         </button>
       </div>
       <p className="note">
-        Loops completed: {loops}. Feedback unlocks after you drill — not live while dancing.
+        Loops cleared: <strong>{loops}</strong> / 1 to unlock XP. Feedback after the drill — not
+        live.
       </p>
       <button type="button" className="btn btn-primary" onClick={onDone} disabled={loops < 1}>
-        {loops < 1 ? 'Complete one loop first' : 'Done — show feedback'}
+        {loops < 1 ? 'Clear one loop' : `Bank +${moment.xp} XP`}
       </button>
     </div>
   )

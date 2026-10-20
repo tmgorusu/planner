@@ -12,6 +12,8 @@ export type WeakMoment = {
   end: number
   tip: string
   score: number
+  xp: number
+  challenge: string
 }
 
 export type SectionScore = {
@@ -32,6 +34,7 @@ export type AnalysisResult = {
   weakMoments: WeakMoment[]
   overallScore: number
   source: 'mediapipe' | 'demo'
+  routineName?: string
 }
 
 export type AppPhase =
@@ -46,4 +49,12 @@ export type VideoPair = {
   studentUrl: string
   coachName: string
   studentName: string
+  poseOnly?: boolean
+}
+
+export type PlayerStats = {
+  xp: number
+  level: number
+  streak: number
+  drillsCleared: number
 }

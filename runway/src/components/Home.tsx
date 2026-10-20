@@ -1,3 +1,6 @@
+import type { PlayerStats } from '../lib/types'
+import { StatsBar } from './StatsBar'
+
 type Props = {
   coachFile: File | null
   studentFile: File | null
@@ -5,6 +8,7 @@ type Props = {
   onStudent: (f: File | null) => void
   onAnalyze: () => void
   onDemo: () => void
+  stats: PlayerStats
   busy?: boolean
 }
 
@@ -15,6 +19,7 @@ export function Home({
   onStudent,
   onAnalyze,
   onDemo,
+  stats,
   busy,
 }: Props) {
   const ready = Boolean(coachFile && studentFile)
@@ -22,17 +27,18 @@ export function Home({
   return (
     <>
       <section className="hero">
-        <p className="eyebrow">Bhangra-first · on-device pose</p>
+        <p className="eyebrow">Coach vs you · on-device pose</p>
         <h1 className="brand">
           Taal<span>.</span>
         </h1>
         <p className="lede">
-          Upload a coach clip and your take of the same routine. Compare side-by-side, then drill
-          the weakest moments — footage stays on your phone.
+          Drop a coach clip and your take. Stack focus beats, clear drills, climb levels — footage
+          never leaves your phone.
         </p>
+        <StatsBar stats={stats} />
         <div className="cta-row">
           <button type="button" className="btn btn-secondary" onClick={onDemo} disabled={busy}>
-            Try sample Bhangra routine
+            Try sample: Mahal step
           </button>
         </div>
       </section>
@@ -40,7 +46,7 @@ export function Home({
       <div className="upload-grid">
         <label className={`upload-tile${coachFile ? ' filled' : ''}`}>
           <strong>Coach video</strong>
-          <span>{coachFile ? coachFile.name : 'Same routine, reference take'}</span>
+          <span>{coachFile ? coachFile.name : 'Reference take of the routine'}</span>
           <input
             type="file"
             accept="video/*"
@@ -66,11 +72,11 @@ export function Home({
         disabled={!ready || busy}
         onClick={onAnalyze}
       >
-        Compare after practice
+        Score my take
       </button>
       <p className="note">
-        No accounts. Pose runs in the browser with MediaPipe. Demo name <strong>Taal</strong>{' '}
-        (working title was Runway).
+        Any style welcome. Pose runs in-browser with MediaPipe. No accounts. Sample routine is one
+        Mahal step — not the brand.
       </p>
     </>
   )

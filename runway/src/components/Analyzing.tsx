@@ -6,9 +6,9 @@ type Props = {
 export function Analyzing({ progress, message }: Props) {
   return (
     <section className="panel progress-block">
-      <p className="eyebrow">Reading pose · client-side</p>
-      <h2 className="brand" style={{ fontSize: '2rem' }}>
-        Finding the weak beats
+      <p className="eyebrow">Scanning the floor</p>
+      <h2 className="brand" style={{ fontSize: '2.1rem' }}>
+        Mapping your match
       </h2>
       <p className="lede" style={{ margin: '0 auto' }}>
         {message}
@@ -16,7 +16,7 @@ export function Analyzing({ progress, message }: Props) {
       <div className="progress-bar" aria-valuenow={Math.round(progress * 100)}>
         <i style={{ width: `${Math.round(progress * 100)}%` }} />
       </div>
-      <p className="note">{Math.round(progress * 100)}%</p>
+      <p className="note">{Math.round(progress * 100)}% · XP loading…</p>
     </section>
   )
 }

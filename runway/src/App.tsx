@@ -5,9 +5,10 @@ import { Home } from './components/Home'
 import { Practice } from './components/Practice'
 import { Review } from './components/Review'
 import { buildDemoAnalysis } from './lib/demoPoses'
+import { clearDrill, loadStats, saveStats } from './lib/game'
 import { extractPosesFromVideo, waitForVideoMeta } from './lib/poseEngine'
 import { analyzePoses } from './lib/scoring'
-import type { AnalysisResult, AppPhase, VideoPair, WeakMoment } from './lib/types'
+import type { AnalysisResult, AppPhase, PlayerStats, VideoPair, WeakMoment } from './lib/types'
 
 function loadVideoEl(url: string): Promise<HTMLVideoElement> {
   return new Promise((resolve, reject) => {
@@ -31,6 +32,8 @@ export default function App() {
   const [message, setMessage] = useState('Preparing…')
   const [activeMomentId, setActiveMomentId] = useState<string | null>(null)
   const [practicedLabel, setPracticedLabel] = useState<string | undefined>()
+  const [stats, setStats] = useState<PlayerStats>(() => loadStats())
+  const [xpGained, setXpGained] = useState(0)
 
   const activeMoment: WeakMoment | null = useMemo(() => {
     if (!analysis || !activeMomentId) return null
@@ -43,6 +46,11 @@ export default function App() {
     if (pair.studentUrl.startsWith('blob:')) URL.revokeObjectURL(pair.studentUrl)
   }, [])
 
+  const persist = (next: PlayerStats) => {
+    setStats(next)
+    saveStats(next)
+  }
+
   const resetHome = () => {
     revokePair(videos)
     setVideos(null)
@@ -51,28 +59,29 @@ export default function App() {
     setStudentFile(null)
     setActiveMomentId(null)
     setPracticedLabel(undefined)
+    setXpGained(0)
     setPhase('home')
   }
 
   const runDemo = async () => {
     revokePair(videos)
     setPhase('analyzing')
-    setProgress(0.15)
-    setMessage('Loading sample Bhangra routine…')
+    setProgress(0.12)
+    setMessage('Loading Mahal sample…')
 
     const pair: VideoPair = {
       coachUrl: `${import.meta.env.BASE_URL}demo/coach.mp4`,
       studentUrl: `${import.meta.env.BASE_URL}demo/student.mp4`,
-      coachName: 'Sample coach',
-      studentName: 'Sample student',
+      coachName: 'Mahal coach',
+      studentName: 'Mahal practice',
+      poseOnly: true,
     }
     setVideos(pair)
 
-    // Visual progress while we build synthetic pose tracks
-    for (let p = 0.2; p <= 0.9; p += 0.15) {
+    for (let p = 0.2; p <= 0.9; p += 0.14) {
       setProgress(p)
-      setMessage(p < 0.5 ? 'Tracing coach skeleton…' : 'Comparing your take…')
-      await new Promise((r) => setTimeout(r, 220))
+      setMessage(p < 0.5 ? 'Tracing coach Mahal…' : 'Finding your focus beats…')
+      await new Promise((r) => setTimeout(r, 240))
     }
 
     const result = buildDemoAnalysis(8)
@@ -95,6 +104,7 @@ export default function App() {
       studentUrl,
       coachName: coachFile.name,
       studentName: studentFile.name,
+      poseOnly: false,
     }
     setVideos(pair)
 
@@ -115,18 +125,17 @@ export default function App() {
         setProgress(0.5 + p * 0.45)
       })
 
-      setMessage('Scoring sections…')
+      setMessage('Scoring your run…')
       const detected =
         coachPoses.some((f) => f.landmarks.length > 0) &&
         studentPoses.some((f) => f.landmarks.length > 0)
 
-      // If MediaPipe couldn't see a person, fall back to demo poses so the UI still works
       const result = detected
         ? analyzePoses(coachPoses, studentPoses, duration, 'mediapipe')
         : { ...buildDemoAnalysis(Math.max(4, Math.min(duration, 8))), source: 'demo' as const }
 
       if (!detected) {
-        setMessage('No clear person detected — showing demo-style feedback on your clips.')
+        setMessage('No clear person detected — demo-style challenges on your clips.')
         await new Promise((r) => setTimeout(r, 600))
       }
 
@@ -135,7 +144,7 @@ export default function App() {
       setPhase('review')
     } catch (err) {
       console.error(err)
-      setMessage('Analysis failed — loading demo feedback instead.')
+      setMessage('Analysis failed — loading sample-style feedback.')
       setAnalysis(buildDemoAnalysis(8))
       setProgress(1)
       setPhase('review')
@@ -152,6 +161,7 @@ export default function App() {
           onStudent={setStudentFile}
           onAnalyze={runUploadAnalysis}
           onDemo={runDemo}
+          stats={stats}
         />
       )}
       {phase === 'analyzing' && <Analyzing progress={progress} message={message} />}
@@ -159,6 +169,7 @@ export default function App() {
         <Review
           videos={videos}
           analysis={analysis}
+          stats={stats}
           onPractice={(id) => {
             setActiveMomentId(id)
             setPhase('practice')
@@ -174,7 +185,10 @@ export default function App() {
           moment={activeMoment}
           onBack={() => setPhase('review')}
           onDone={() => {
-            setPracticedLabel(activeMoment.label)
+            const next = clearDrill(stats, activeMoment.xp)
+            persist(next)
+            setXpGained(activeMoment.xp)
+            setPracticedLabel(activeMoment.challenge)
             setPhase('feedback')
           }}
         />
@@ -182,9 +196,15 @@ export default function App() {
       {phase === 'feedback' && analysis && (
         <Feedback
           analysis={analysis}
+          stats={stats}
           practicedLabel={practicedLabel}
+          xpGained={xpGained}
           onAgain={() => {
-            setActiveMomentId(analysis.weakMoments[0]?.id ?? null)
+            const nextId =
+              analysis.weakMoments.find((w) => w.id !== activeMomentId)?.id ??
+              analysis.weakMoments[0]?.id ??
+              null
+            setActiveMomentId(nextId)
             setPhase('practice')
           }}
           onHome={resetHome}

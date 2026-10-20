@@ -1,100 +1,174 @@
 import type { AnalysisResult, Point, PoseFrame } from './types'
 import { KEY_LANDMARKS } from './poseConnections'
 
-function basePose(t: number, energy: number, phase = 0): Point[] {
-  const pts: Point[] = Array.from({ length: 33 }, () => ({
-    x: 0.5,
-    y: 0.5,
-    visibility: 0.2,
-  }))
+/**
+ * Keyframed Mahal — classic Bhangra bounce with high arm pumps.
+ * Cycle reads as: deep bounce + fists at temple → spring up + arms high
+ * → alternate weight → settle. Intentionally readable as that step.
+ */
+function emptyPose(): Point[] {
+  return Array.from({ length: 33 }, () => ({ x: 0.5, y: 0.5, visibility: 0.15 }))
+}
 
-  const sway = Math.sin(t * Math.PI * 2 * 0.85 + phase) * 0.04 * energy
-  const bounce = Math.abs(Math.sin(t * Math.PI * 2 * 0.85 + phase)) * 0.03 * energy
-  const arm = Math.sin(t * Math.PI * 2 * 0.85 + phase) * 0.18 * energy
-  const knee = Math.abs(Math.sin(t * Math.PI * 2 * 0.85 + phase)) * 0.08 * energy
+function set(pts: Point[], i: number, x: number, y: number, v = 0.97) {
+  pts[i] = { x, y, visibility: v }
+}
 
-  const set = (i: number, x: number, y: number, v = 0.95) => {
-    pts[i] = { x, y, visibility: v }
-  }
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t
+}
 
-  set(KEY_LANDMARKS.nose, 0.5 + sway, 0.18 - bounce)
-  set(1, 0.48 + sway, 0.2 - bounce)
-  set(2, 0.47 + sway, 0.2 - bounce)
-  set(3, 0.45 + sway, 0.21 - bounce)
-  set(4, 0.52 + sway, 0.2 - bounce)
-  set(5, 0.53 + sway, 0.2 - bounce)
-  set(6, 0.55 + sway, 0.21 - bounce)
-  set(7, 0.44 + sway, 0.22 - bounce)
-  set(8, 0.56 + sway, 0.22 - bounce)
-  set(9, 0.48 + sway, 0.24 - bounce)
-  set(10, 0.52 + sway, 0.24 - bounce)
+function smoothstep(t: number) {
+  const x = Math.min(1, Math.max(0, t))
+  return x * x * (3 - 2 * x)
+}
 
-  set(KEY_LANDMARKS.leftShoulder, 0.42 + sway, 0.3 - bounce)
-  set(KEY_LANDMARKS.rightShoulder, 0.58 + sway, 0.3 - bounce)
-  set(KEY_LANDMARKS.leftElbow, 0.32 + sway - arm * 0.3, 0.42 - bounce + Math.abs(arm) * 0.2)
-  set(KEY_LANDMARKS.rightElbow, 0.68 + sway + arm * 0.3, 0.42 - bounce + Math.abs(arm) * 0.2)
-  set(KEY_LANDMARKS.leftWrist, 0.28 + sway - arm, 0.28 - bounce - arm * 0.4)
-  set(KEY_LANDMARKS.rightWrist, 0.72 + sway + arm, 0.28 - bounce - arm * 0.4)
+/** One Mahal bounce cycle in [0,1]. */
+function mahalKey(u: number, side: 1 | -1 = 1): Point[] {
+  const pts = emptyPose()
+  // 0–0.5 downbeat crouch + arm pump up; 0.5–1 spring + open
+  const down = u < 0.5 ? smoothstep(u * 2) : smoothstep(2 - u * 2)
+  const bounceY = lerp(0.02, 0.07, down)
+  const kneeBend = lerp(0.02, 0.1, down)
+  const armPump = u < 0.5 ? smoothstep(u * 2) : smoothstep((u - 0.5) * 2)
+  // Arms: low chest → high above head (Mahal signature)
+  const wristY = lerp(0.36, 0.08, armPump)
+  const elbowY = lerp(0.4, 0.2, armPump)
+  const wristSpread = lerp(0.12, 0.2, armPump)
+  const shoulderLift = lerp(0, 0.025, armPump)
+  const sway = side * lerp(-0.02, 0.035, Math.sin(u * Math.PI))
+  const chest = 0.5 + sway * 0.4
 
-  set(15 + 2, 0.26 + sway - arm, 0.26 - bounce)
-  set(16 + 2, 0.74 + sway + arm, 0.26 - bounce)
-  set(19, 0.27 + sway - arm, 0.27 - bounce)
-  set(20, 0.73 + sway + arm, 0.27 - bounce)
-  set(21, 0.29 + sway - arm, 0.29 - bounce)
-  set(22, 0.71 + sway + arm, 0.29 - bounce)
+  // Face / head
+  set(pts, KEY_LANDMARKS.nose, chest, 0.16 - bounceY + shoulderLift * 0.3)
+  set(pts, 1, chest - 0.02, 0.18 - bounceY)
+  set(pts, 2, chest - 0.03, 0.18 - bounceY)
+  set(pts, 3, chest - 0.05, 0.19 - bounceY)
+  set(pts, 4, chest + 0.02, 0.18 - bounceY)
+  set(pts, 5, chest + 0.03, 0.18 - bounceY)
+  set(pts, 6, chest + 0.05, 0.19 - bounceY)
+  set(pts, 7, chest - 0.06, 0.2 - bounceY)
+  set(pts, 8, chest + 0.06, 0.2 - bounceY)
+  set(pts, 9, chest - 0.02, 0.22 - bounceY)
+  set(pts, 10, chest + 0.02, 0.22 - bounceY)
 
-  set(KEY_LANDMARKS.leftHip, 0.45 + sway * 0.6, 0.52)
-  set(KEY_LANDMARKS.rightHip, 0.55 + sway * 0.6, 0.52)
-  set(KEY_LANDMARKS.leftKnee, 0.44 + sway * 0.4, 0.7 + knee)
-  set(KEY_LANDMARKS.rightKnee, 0.56 + sway * 0.4, 0.7 + knee * 0.7)
-  set(KEY_LANDMARKS.leftAnkle, 0.43 + sway * 0.2, 0.88)
-  set(KEY_LANDMARKS.rightAnkle, 0.57 + sway * 0.2, 0.88)
-  set(29, 0.42, 0.92)
-  set(30, 0.58, 0.92)
-  set(31, 0.45, 0.93)
-  set(32, 0.55, 0.93)
+  // Torso — proud upright Mahal carriage
+  set(pts, KEY_LANDMARKS.leftShoulder, chest - 0.1, 0.28 - bounceY - shoulderLift)
+  set(pts, KEY_LANDMARKS.rightShoulder, chest + 0.1, 0.28 - bounceY - shoulderLift)
+
+  // High bent elbows, fists pumping near / above head
+  set(pts, KEY_LANDMARKS.leftElbow, chest - 0.16 - wristSpread * 0.15, elbowY - bounceY)
+  set(pts, KEY_LANDMARKS.rightElbow, chest + 0.16 + wristSpread * 0.15, elbowY - bounceY)
+  set(pts, KEY_LANDMARKS.leftWrist, chest - wristSpread, wristY - bounceY)
+  set(pts, KEY_LANDMARKS.rightWrist, chest + wristSpread, wristY - bounceY)
+
+  // Hands
+  set(pts, 17, chest - wristSpread - 0.01, wristY - bounceY - 0.01)
+  set(pts, 18, chest + wristSpread + 0.01, wristY - bounceY - 0.01)
+  set(pts, 19, chest - wristSpread, wristY - bounceY + 0.01)
+  set(pts, 20, chest + wristSpread, wristY - bounceY + 0.01)
+  set(pts, 21, chest - wristSpread + 0.01, wristY - bounceY)
+  set(pts, 22, chest + wristSpread - 0.01, wristY - bounceY)
+
+  // Hips & bouncing knees (in-place Mahal hop)
+  set(pts, KEY_LANDMARKS.leftHip, chest - 0.06, 0.5 - bounceY * 0.4)
+  set(pts, KEY_LANDMARKS.rightHip, chest + 0.06, 0.5 - bounceY * 0.4)
+
+  const leftLead = side < 0 ? 1.15 : 0.85
+  const rightLead = side > 0 ? 1.15 : 0.85
+  set(pts, KEY_LANDMARKS.leftKnee, chest - 0.07 + sway * 0.2, 0.68 + kneeBend * leftLead - bounceY * 0.2)
+  set(pts, KEY_LANDMARKS.rightKnee, chest + 0.07 + sway * 0.2, 0.68 + kneeBend * rightLead - bounceY * 0.2)
+  set(pts, KEY_LANDMARKS.leftAnkle, chest - 0.08 + sway * 0.15, 0.9 - bounceY * 0.15)
+  set(pts, KEY_LANDMARKS.rightAnkle, chest + 0.08 + sway * 0.15, 0.9 - bounceY * 0.15)
+  set(pts, 29, chest - 0.09, 0.93)
+  set(pts, 30, chest + 0.09, 0.93)
+  set(pts, 31, chest - 0.06, 0.94)
+  set(pts, 32, chest + 0.06, 0.94)
 
   return pts
 }
 
-function studentDrift(t: number, landmarks: Point[]): Point[] {
-  // Intentional weak moments: arms lag mid-routine, feet rush near end, posture dips
-  const lag =
-    t > 2.2 && t < 3.4
-      ? 0.35
-      : t > 4.4 && t < 5.4
-        ? 0.55
-        : t > 6.0 && t < 7.0
-          ? 0.4
-          : 0.08
+/** Coach Mahal at ~96 BPM (bounce every beat). */
+export function mahalPoseAt(t: number): Point[] {
+  const bpm = 96
+  const beats = (t * bpm) / 60
+  const u = beats % 1
+  const side: 1 | -1 = Math.floor(beats) % 2 === 0 ? 1 : -1
+  return mahalKey(u, side)
+}
 
-  const delayed = basePose(Math.max(0, t - lag * 0.35), 0.85, 0.4)
-  return landmarks.map((p, i) => {
-    const d = delayed[i]
-    const mix = lag
-    return {
-      x: p.x * (1 - mix) + d.x * mix + (i === KEY_LANDMARKS.nose && t > 4.4 && t < 5.4 ? 0.03 : 0),
-      y:
-        p.y * (1 - mix) +
-        d.y * mix +
-        (t > 6.0 && t < 7.0 && (i === KEY_LANDMARKS.leftShoulder || i === KEY_LANDMARKS.rightShoulder)
-          ? 0.04
-          : 0),
-      visibility: Math.min(p.visibility ?? 1, d.visibility ?? 1),
+function studentMahalAt(t: number): Point[] {
+  // Challenge windows: late pump, shallow bounce, collapsed arms
+  let lag = 0.06
+  let armScale = 1
+  let bounceScale = 1
+
+  if (t >= 2.2 && t < 3.5) {
+    // Arms don’t reach full Mahal height
+    lag = 0.18
+    armScale = 0.55
+  } else if (t >= 4.3 && t < 5.5) {
+    // Bounce timing late / shallow
+    lag = 0.28
+    bounceScale = 0.45
+  } else if (t >= 6.0 && t < 7.1) {
+    // Finish: arms drop, posture soft
+    lag = 0.12
+    armScale = 0.4
+    bounceScale = 0.7
+  }
+
+  const coach = mahalPoseAt(Math.max(0, t - lag))
+  const pts = coach.map((p) => ({ ...p }))
+
+  // Pull wrists/elbows down when armScale < 1
+  const pull = 1 - armScale
+  for (const i of [
+    KEY_LANDMARKS.leftWrist,
+    KEY_LANDMARKS.rightWrist,
+    KEY_LANDMARKS.leftElbow,
+    KEY_LANDMARKS.rightElbow,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+  ]) {
+    pts[i] = {
+      ...pts[i],
+      y: pts[i].y + pull * 0.14,
+      x: lerp(pts[i].x, 0.5, pull * 0.15),
     }
-  })
+  }
+
+  // Flatten bounce
+  const flatten = 1 - bounceScale
+  for (const i of [
+    KEY_LANDMARKS.leftKnee,
+    KEY_LANDMARKS.rightKnee,
+    KEY_LANDMARKS.leftHip,
+    KEY_LANDMARKS.rightHip,
+    KEY_LANDMARKS.nose,
+  ]) {
+    pts[i] = {
+      ...pts[i],
+      y: pts[i].y - flatten * 0.03,
+    }
+  }
+
+  return pts
 }
 
 export function buildDemoAnalysis(duration = 8): AnalysisResult {
-  const fps = 12
+  const fps = 15
   const coachPoses: PoseFrame[] = []
   const studentPoses: PoseFrame[] = []
 
   for (let i = 0; i <= duration * fps; i++) {
     const t = i / fps
-    const coach = basePose(t, 1, 0)
-    coachPoses.push({ t, landmarks: coach })
-    studentPoses.push({ t, landmarks: studentDrift(t, coach) })
+    coachPoses.push({ t, landmarks: mahalPoseAt(t) })
+    studentPoses.push({ t, landmarks: studentMahalAt(t) })
   }
 
   const bpm = 96
@@ -107,40 +181,47 @@ export function buildDemoAnalysis(duration = 8): AnalysisResult {
     coachPoses,
     studentPoses,
     beatTimes,
-    syncOffset: 0.12,
+    syncOffset: 0.1,
+    routineName: 'Mahal',
     sectionScores: [
-      { id: 'intro', label: 'Intro bounce', score: 86, start: 0, end: 2.2 },
-      { id: 'arms', label: 'Arm swings', score: 62, start: 2.2, end: 4.4 },
-      { id: 'jhummar', label: 'Shoulder pulse', score: 54, start: 4.4, end: 6.0 },
-      { id: 'finish', label: 'Finish posture', score: 58, start: 6.0, end: 8.0 },
+      { id: 'lift', label: 'Lift-off', score: 88, start: 0, end: 2.2 },
+      { id: 'pump', label: 'Arm pump', score: 58, start: 2.2, end: 4.3 },
+      { id: 'bounce', label: 'Bounce timing', score: 49, start: 4.3, end: 6.0 },
+      { id: 'hold', label: 'Finish hold', score: 52, start: 6.0, end: 8.0 },
     ],
     weakMoments: [
       {
         id: 'w1',
-        label: 'Arm height lag',
-        start: 2.4,
-        end: 3.3,
-        tip: 'Match the coach’s wrist height on the upswing — keep elbows soft, not locked.',
-        score: 48,
+        label: 'High pump',
+        challenge: 'Reach temple height',
+        start: 2.3,
+        end: 3.4,
+        tip: 'On the upbeat, drive both fists to temple height — elbows soft, chest proud.',
+        score: 46,
+        xp: 40,
       },
       {
         id: 'w2',
-        label: 'Shoulder pulse',
-        start: 4.5,
-        end: 5.3,
-        tip: 'Pulse from the upper back. Keep the chest lifted while shoulders bounce on the beat.',
-        score: 42,
+        label: 'Bounce lock',
+        challenge: 'Land with the coach',
+        start: 4.4,
+        end: 5.4,
+        tip: 'Match the coach’s downbeat. Soften the knees and spring — don’t rush the hop.',
+        score: 38,
+        xp: 50,
       },
       {
         id: 'w3',
-        label: 'Finish stance',
+        label: 'Finish frame',
+        challenge: 'Hold the last beat',
         start: 6.1,
-        end: 6.9,
-        tip: 'Plant both feet under the hips and hold the final frame for a full beat.',
-        score: 45,
+        end: 7.0,
+        tip: 'Keep arms high through the last bounce, then plant and freeze for a full beat.',
+        score: 42,
+        xp: 45,
       },
     ],
-    overallScore: 65,
+    overallScore: 62,
     source: 'demo',
   }
 }

@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
-import type { AnalysisResult, VideoPair } from '../lib/types'
+import { xpForLevel } from '../lib/game'
+import type { AnalysisResult, PlayerStats, VideoPair } from '../lib/types'
+import { StatsBar } from './StatsBar'
 import { Timeline } from './Timeline'
 import { VideoPane } from './VideoPane'
 
 type Props = {
   videos: VideoPair
   analysis: AnalysisResult
+  stats: PlayerStats
   onPractice: (momentId: string) => void
   onFeedback: () => void
   onHome: () => void
@@ -17,11 +20,12 @@ function tone(score: number) {
   return 'low'
 }
 
-export function Review({ videos, analysis, onPractice, onFeedback, onHome }: Props) {
+export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome }: Props) {
   const coachRef = useRef<HTMLVideoElement>(null)
   const studentRef = useRef<HTMLVideoElement>(null)
   const [time, setTime] = useState(0)
   const [playing, setPlaying] = useState(false)
+  const poseOnly = Boolean(videos.poseOnly)
 
   const syncSeek = (t: number) => {
     setTime(t)
@@ -52,12 +56,14 @@ export function Review({ videos, analysis, onPractice, onFeedback, onHome }: Pro
     if (!c) return
     const onEnded = () => {
       setPlaying(false)
-      sPause()
+      studentRef.current?.pause()
     }
-    const sPause = () => studentRef.current?.pause()
     c.addEventListener('ended', onEnded)
     return () => c.removeEventListener('ended', onEnded)
   }, [])
+
+  const need = xpForLevel(stats.level)
+  const xpPct = Math.min(100, Math.round((stats.xp / need) * 100))
 
   return (
     <>
@@ -66,17 +72,20 @@ export function Review({ videos, analysis, onPractice, onFeedback, onHome }: Pro
           Taal<span>.</span>
         </h1>
         <button type="button" className="btn btn-ghost" onClick={onHome}>
-          New
+          New run
         </button>
       </div>
+
+      <StatsBar stats={stats} compact />
 
       <div className="stage">
         <VideoPane
           src={videos.coachUrl}
           label="Coach"
-          color="#f0b429"
+          color="#ff5a7a"
           poses={analysis.coachPoses}
           currentTime={time}
+          poseOnly={poseOnly}
           videoRef={coachRef}
           onTimeUpdate={(t) => {
             setTime(t)
@@ -88,9 +97,10 @@ export function Review({ videos, analysis, onPractice, onFeedback, onHome }: Pro
         <VideoPane
           src={videos.studentUrl}
           label="You"
-          color="#2dd4a8"
+          color="#3ee0c5"
           poses={analysis.studentPoses}
           currentTime={time}
+          poseOnly={poseOnly}
           videoRef={studentRef}
         />
       </div>
@@ -100,9 +110,12 @@ export function Review({ videos, analysis, onPractice, onFeedback, onHome }: Pro
           {playing ? 'Pause' : 'Play together'}
         </button>
         <span className="sync-pill">
-          Beat sync ~{Math.round(analysis.syncOffset * 1000)}ms ·{' '}
-          {analysis.source === 'demo' ? 'demo poses' : 'MediaPipe'}
+          Sync ~{Math.round(analysis.syncOffset * 1000)}ms ·{' '}
+          {analysis.source === 'demo' ? 'sample poses' : 'MediaPipe'}
         </span>
+        {analysis.routineName && (
+          <span className="routine-chip">Sample · {analysis.routineName}</span>
+        )}
       </div>
 
       <Timeline
@@ -115,14 +128,28 @@ export function Review({ videos, analysis, onPractice, onFeedback, onHome }: Pro
       />
 
       <section className="panel">
-        <h2>Section scores</h2>
-        <div className="score-row">
-          <div className="score-chip">
-            <p className="label">Overall</p>
-            <p className={`value ${tone(analysis.overallScore)}`}>{analysis.overallScore}</p>
+        <div className="match-hero">
+          <div className="match-ring" style={{ ['--p' as string]: analysis.overallScore }}>
+            <div>{analysis.overallScore}</div>
           </div>
+          <div>
+            <h2 style={{ margin: 0 }}>Match score</h2>
+            <p className="note">
+              Clear focus beats to earn XP and grow your streak. Level {stats.level} · {stats.xp}/
+              {need} XP
+            </p>
+            <div className="xp-track">
+              <i style={{ width: `${xpPct}%` }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="panel">
+        <h2>Section run</h2>
+        <div className="section-rail">
           {analysis.sectionScores.map((s) => (
-            <div className="score-chip" key={s.id}>
+            <div className="section-pip" key={s.id}>
               <p className="label">{s.label}</p>
               <p className={`value ${tone(s.score)}`}>{s.score}</p>
             </div>
@@ -131,19 +158,23 @@ export function Review({ videos, analysis, onPractice, onFeedback, onHome }: Pro
       </section>
 
       <section className="panel">
-        <h2>Weakest moments</h2>
-        <ul className="weak-list">
+        <h2>Focus beats</h2>
+        <p className="note" style={{ marginBottom: '0.65rem' }}>
+          Timeline challenges — tap to drill. Beat the coach on these windows.
+        </p>
+        <ul className="challenge-list">
           {analysis.weakMoments.map((w, i) => (
             <li key={w.id}>
-              <button type="button" className="weak-item" onClick={() => onPractice(w.id)}>
+              <button type="button" className="challenge-item" onClick={() => onPractice(w.id)}>
                 <span className="idx">{i + 1}</span>
                 <span>
-                  <strong>{w.label}</strong>
+                  <strong>{w.challenge}</strong>
                   <br />
                   <span className="note">
-                    {w.start.toFixed(1)}s–{w.end.toFixed(1)}s · score {w.score}
+                    {w.label} · {w.start.toFixed(1)}–{w.end.toFixed(1)}s · score {w.score}
                   </span>
                 </span>
+                <span className="xp-badge">+{w.xp} XP</span>
               </button>
             </li>
           ))}
@@ -156,10 +187,10 @@ export function Review({ videos, analysis, onPractice, onFeedback, onHome }: Pro
           className="btn btn-secondary"
           onClick={() => onPractice(analysis.weakMoments[0]?.id ?? 'w1')}
         >
-          Practice slow + mirrored
+          Start first challenge
         </button>
         <button type="button" className="btn btn-primary" onClick={onFeedback}>
-          See feedback
+          Claim run summary
         </button>
       </div>
     </>

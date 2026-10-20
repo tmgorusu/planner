@@ -1,6 +1,6 @@
-# Taal — Bhangra feedback demo
+# Taal — dance feedback demo
 
-Phone-friendly web MVP for side-by-side coach vs student dance feedback (working title was **Runway**). Pose runs in-browser with MediaPipe; footage stays client-side.
+Phone-friendly web MVP: coach vs you pose comparison, focus-beat challenges, on-device MediaPipe. (Working title was **Runway**.)
 
 ## Quick start
 
@@ -10,36 +10,31 @@ npm install
 npm run dev
 ```
 
-Open the printed local URL (use the network URL on a phone).
-
 ## Deploy (Vercel)
 
-From repo root, set **Root Directory** to `runway`, or:
+Root Directory = `runway`, or:
 
 ```bash
 cd runway
 npx vercel --prod
 ```
 
-Build command: `npm run build` · Output: `dist`
-
 ## Demo flow
 
-1. **Try sample Bhangra routine** — synthetic poses + sample clips (no upload).
-2. Or upload coach + student videos of the same routine → on-device MediaPipe Pose.
-3. Side-by-side playback with skeleton overlays, beat markers, section scores, ~3 weak moments.
-4. **Practice** — slowed + mirrored loops of a weak segment.
-5. **Feedback** after practice (not live).
+1. **Try sample: Mahal step** — keyframed Mahal coach/student poses (readable arm-pump + bounce), not abstract noise.
+2. Or upload any-style coach + student videos → MediaPipe Pose on-device.
+3. Side-by-side overlays, beat timeline, section scores, XP / streak / levels (session-only).
+4. Practice: slowed + mirrored loops of focus beats → feedback after drill.
 
 ## Real vs simplified
 
 | Piece | Status |
 | --- | --- |
-| Pose overlay | **Real** MediaPipe Pose Landmarker on uploads; **synthetic** tracks for sample demo |
-| Section / weak scores | Lightweight landmark distance (not production DTW) |
-| Beat sync | Visual markers + small offset pill (mocked alignment) |
-| Practice loops | Real playback rate + CSS mirror + segment loop |
-| Accounts / social / AI choreography | Out of scope |
+| Upload pose | **Real** MediaPipe Pose Landmarker |
+| Mahal sample | **Keyframed** landmarks (not filmed dancers) |
+| Scores | Lightweight landmark distance |
+| Beat sync | Visual markers + offset pill |
+| XP / streak / level | Session `sessionStorage` only — no accounts |
 
 ## Stack
 
