@@ -1,5 +1,9 @@
+import { useRef } from 'react'
 import type { PlayerStats } from '../lib/types'
 import { StatsBar } from './StatsBar'
+
+/** Prefer library pickers on iOS/Android — no `capture` (that jumps to camera). */
+const VIDEO_ACCEPT = 'video/*,video/mp4,video/quicktime,video/webm,video/x-m4v,.mp4,.mov,.m4v,.webm'
 
 type Props = {
   coachFile: File | null
@@ -23,6 +27,8 @@ export function Home({
   busy,
 }: Props) {
   const ready = Boolean(coachFile && studentFile)
+  const coachInputRef = useRef<HTMLInputElement>(null)
+  const studentInputRef = useRef<HTMLInputElement>(null)
 
   return (
     <>
@@ -40,26 +46,56 @@ export function Home({
       </section>
 
       <div className="upload-grid">
-        <label className={`upload-tile${coachFile ? ' filled' : ''}`}>
+        <div className={`upload-tile${coachFile ? ' filled' : ''}`}>
           <strong>Coach</strong>
-          <span>{coachFile ? coachFile.name : 'Add coach video'}</span>
+          <span className="upload-name">
+            {coachFile ? coachFile.name : 'No video chosen'}
+          </span>
           <input
+            ref={coachInputRef}
             type="file"
-            accept="video/*"
-            capture="environment"
-            onChange={(e) => onCoach(e.target.files?.[0] ?? null)}
+            accept={VIDEO_ACCEPT}
+            className="sr-only"
+            aria-label="Choose coach video"
+            onChange={(e) => {
+              onCoach(e.target.files?.[0] ?? null)
+              e.target.value = ''
+            }}
           />
-        </label>
-        <label className={`upload-tile${studentFile ? ' filled' : ''}`}>
+          <button
+            type="button"
+            className="btn btn-ghost upload-pick"
+            disabled={busy}
+            onClick={() => coachInputRef.current?.click()}
+          >
+            Choose coach video
+          </button>
+        </div>
+        <div className={`upload-tile${studentFile ? ' filled' : ''}`}>
           <strong>Student</strong>
-          <span>{studentFile ? studentFile.name : 'Add student video'}</span>
+          <span className="upload-name">
+            {studentFile ? studentFile.name : 'No video chosen'}
+          </span>
           <input
+            ref={studentInputRef}
             type="file"
-            accept="video/*"
-            capture="environment"
-            onChange={(e) => onStudent(e.target.files?.[0] ?? null)}
+            accept={VIDEO_ACCEPT}
+            className="sr-only"
+            aria-label="Choose your video"
+            onChange={(e) => {
+              onStudent(e.target.files?.[0] ?? null)
+              e.target.value = ''
+            }}
           />
-        </label>
+          <button
+            type="button"
+            className="btn btn-ghost upload-pick"
+            disabled={busy}
+            onClick={() => studentInputRef.current?.click()}
+          >
+            Choose your video
+          </button>
+        </div>
       </div>
 
       <button
@@ -70,7 +106,9 @@ export function Home({
       >
         Score
       </button>
-      <p className="note">No account. Sample is Mahal — any style works for uploads.</p>
+      <p className="note">
+        Choose videos from Photos. No account. Sample is Mahal — any style works for uploads.
+      </p>
     </>
   )
 }

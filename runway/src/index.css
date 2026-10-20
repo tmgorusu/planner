@@ -172,11 +172,10 @@ button {
 }
 
 .upload-tile {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  padding: 0.85rem;
+  gap: 0.35rem;
+  padding: 0.75rem;
   border-radius: var(--radius);
   border: 1px dashed var(--stroke);
   background: var(--surface);
@@ -190,21 +189,36 @@ button {
   letter-spacing: -0.02em;
 }
 
-.upload-tile span {
+.upload-tile .upload-name {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.upload-tile input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
+.upload-tile .upload-pick {
+  margin-top: 0.15rem;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.85rem;
 }
 
 .upload-tile.filled {
   border-style: solid;
   border-color: var(--signal);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .note {
