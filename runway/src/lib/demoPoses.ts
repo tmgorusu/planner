@@ -31,10 +31,10 @@ function mahalKey(u: number, side: 1 | -1 = 1): Point[] {
   const bounceY = lerp(0.02, 0.07, down)
   const kneeBend = lerp(0.02, 0.1, down)
   const armPump = u < 0.5 ? smoothstep(u * 2) : smoothstep((u - 0.5) * 2)
-  // Arms: low chest → high above head (Mahal signature)
-  const wristY = lerp(0.36, 0.08, armPump)
-  const elbowY = lerp(0.4, 0.2, armPump)
-  const wristSpread = lerp(0.12, 0.2, armPump)
+  // Arms stay elevated (Mahal signature): temple line → above head
+  const wristY = lerp(0.2, 0.05, armPump)
+  const elbowY = lerp(0.28, 0.14, armPump)
+  const wristSpread = lerp(0.14, 0.22, armPump)
   const shoulderLift = lerp(0, 0.025, armPump)
   const sway = side * lerp(-0.02, 0.035, Math.sin(u * Math.PI))
   const chest = 0.5 + sway * 0.4
