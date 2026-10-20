@@ -1,29 +1,23 @@
-import { rankTitle, xpForLevel } from '../lib/game'
+import { xpForLevel } from '../lib/game'
 import type { PlayerStats } from '../lib/types'
 
 type Props = {
   stats: PlayerStats
-  compact?: boolean
 }
 
-export function StatsBar({ stats, compact }: Props) {
+export function StatsBar({ stats }: Props) {
   const need = xpForLevel(stats.level)
-  const pct = Math.min(100, Math.round((stats.xp / need) * 100))
 
   return (
-    <div className="stats-strip">
-      <span className="stat-pill level">
-        Lv {stats.level}
-        {!compact && ` · ${rankTitle(stats.level)}`}
+    <div className="stats-strip" aria-label="Progress">
+      <span className="stat-pill">
+        Level <strong>{stats.level}</strong>
       </span>
-      <span className="stat-pill streak">🔥 {stats.streak} streak</span>
-      <span className="stat-pill xp">
-        {stats.xp}/{need} XP
-        {!compact && (
-          <span className="xp-track" style={{ width: 48, display: 'inline-block', margin: 0 }}>
-            <i style={{ width: `${pct}%` }} />
-          </span>
-        )}
+      <span className="stat-pill">
+        Streak <strong>{stats.streak}</strong>
+      </span>
+      <span className="stat-pill">
+        XP <strong>{stats.xp}/{need}</strong>
       </span>
     </div>
   )

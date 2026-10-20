@@ -72,17 +72,17 @@ export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome
           Taal<span>.</span>
         </h1>
         <button type="button" className="btn btn-ghost" onClick={onHome}>
-          New run
+          Home
         </button>
       </div>
 
-      <StatsBar stats={stats} compact />
+      <StatsBar stats={stats} />
 
       <div className="stage">
         <VideoPane
           src={videos.coachUrl}
           label="Coach"
-          color="#ff5a7a"
+          color="#e84d6a"
           poses={analysis.coachPoses}
           currentTime={time}
           poseOnly={poseOnly}
@@ -96,8 +96,8 @@ export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome
         />
         <VideoPane
           src={videos.studentUrl}
-          label="You"
-          color="#3ee0c5"
+          label="Student"
+          color="#2ec4a8"
           poses={analysis.studentPoses}
           currentTime={time}
           poseOnly={poseOnly}
@@ -107,15 +107,13 @@ export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome
 
       <div className="controls">
         <button type="button" className="btn btn-primary" onClick={togglePlay}>
-          {playing ? 'Pause' : 'Play together'}
+          {playing ? 'Pause' : 'Play'}
         </button>
         <span className="sync-pill">
-          Sync ~{Math.round(analysis.syncOffset * 1000)}ms ·{' '}
-          {analysis.source === 'demo' ? 'sample poses' : 'MediaPipe'}
+          Sync {Math.round(analysis.syncOffset * 1000)}ms
+          {analysis.source === 'demo' ? ' · sample' : ' · MediaPipe'}
         </span>
-        {analysis.routineName && (
-          <span className="routine-chip">Sample · {analysis.routineName}</span>
-        )}
+        {analysis.routineName && <span className="routine-chip">{analysis.routineName}</span>}
       </div>
 
       <Timeline
@@ -129,14 +127,11 @@ export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome
 
       <section className="panel">
         <div className="match-hero">
-          <div className="match-ring" style={{ ['--p' as string]: analysis.overallScore }}>
-            <div>{analysis.overallScore}</div>
-          </div>
+          <div className={`match-score ${tone(analysis.overallScore)}`}>{analysis.overallScore}</div>
           <div>
-            <h2 style={{ margin: 0 }}>Match score</h2>
+            <h2 style={{ margin: 0 }}>Match</h2>
             <p className="note">
-              Clear focus beats to earn XP and grow your streak. Level {stats.level} · {stats.xp}/
-              {need} XP
+              Level {stats.level} · {stats.xp}/{need} XP
             </p>
             <div className="xp-track">
               <i style={{ width: `${xpPct}%` }} />
@@ -146,7 +141,7 @@ export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome
       </section>
 
       <section className="panel">
-        <h2>Section run</h2>
+        <h2>Sections</h2>
         <div className="section-rail">
           {analysis.sectionScores.map((s) => (
             <div className="section-pip" key={s.id}>
@@ -158,9 +153,9 @@ export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome
       </section>
 
       <section className="panel">
-        <h2>Focus beats</h2>
-        <p className="note" style={{ marginBottom: '0.65rem' }}>
-          Timeline challenges — tap to drill. Beat the coach on these windows.
+        <h2>Weak spots</h2>
+        <p className="note" style={{ marginBottom: '0.5rem' }}>
+          Tap a spot to practice.
         </p>
         <ul className="challenge-list">
           {analysis.weakMoments.map((w, i) => (
@@ -168,10 +163,10 @@ export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome
               <button type="button" className="challenge-item" onClick={() => onPractice(w.id)}>
                 <span className="idx">{i + 1}</span>
                 <span>
-                  <strong>{w.challenge}</strong>
+                  <strong>{w.label}</strong>
                   <br />
                   <span className="note">
-                    {w.label} · {w.start.toFixed(1)}–{w.end.toFixed(1)}s · score {w.score}
+                    {w.start.toFixed(1)}–{w.end.toFixed(1)}s · {w.score}
                   </span>
                 </span>
                 <span className="xp-badge">+{w.xp} XP</span>
@@ -187,10 +182,10 @@ export function Review({ videos, analysis, stats, onPractice, onFeedback, onHome
           className="btn btn-secondary"
           onClick={() => onPractice(analysis.weakMoments[0]?.id ?? 'w1')}
         >
-          Start first challenge
+          Practice first spot
         </button>
         <button type="button" className="btn btn-primary" onClick={onFeedback}>
-          Claim run summary
+          Done
         </button>
       </div>
     </>

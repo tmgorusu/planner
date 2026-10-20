@@ -14,7 +14,7 @@ export function Timeline({
   currentTime,
   beatTimes,
   weakMoments,
-  syncOffset,
+  syncOffset: _syncOffset,
   onSeek,
 }: Props) {
   const pct = duration > 0 ? (currentTime / duration) * 100 : 0
@@ -43,14 +43,11 @@ export function Timeline({
       }}
     >
       <div className="timeline-track">
-        {beatTimes.map((t, i) => (
+        {beatTimes.map((t) => (
           <i
             key={`b-${t}`}
             className="beat-mark"
-            style={{
-              left: `${(t / duration) * 100}%`,
-              animationDelay: `${(i % 4) * 0.08 + syncOffset}s`,
-            }}
+            style={{ left: `${(t / duration) * 100}%` }}
           />
         ))}
         {weakMoments.map((w) => (
@@ -58,7 +55,7 @@ export function Timeline({
             key={w.id}
             type="button"
             className="weak-mark"
-            title={w.challenge}
+            title={w.label}
             style={{
               left: `${(w.start / duration) * 100}%`,
               width: `${((w.end - w.start) / duration) * 100}%`,

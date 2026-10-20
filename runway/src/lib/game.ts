@@ -45,16 +45,16 @@ export function clearDrill(stats: PlayerStats, xpGain: number): PlayerStats {
   )
 }
 
-export function rankTitle(level: number): string {
-  if (level >= 8) return 'Floor legend'
-  if (level >= 5) return 'Combo hunter'
-  if (level >= 3) return 'Beat runner'
-  return 'Warm-up crew'
-}
-
-export function vibeLine(score: number): string {
-  if (score >= 85) return 'Clean hit — coach energy unlocked.'
-  if (score >= 70) return 'Solid groove. One more drill and you’re flying.'
-  if (score >= 55) return 'You’re in the pocket — polish the focus beats.'
-  return 'Rough cut, good instincts. Slow it down and stack a streak.'
+/** One-line result + next action. */
+export function resultLine(score: number): { happened: string; next: string } {
+  if (score >= 85) {
+    return { happened: 'Strong match to the coach.', next: 'Practice a weak spot to lock it in.' }
+  }
+  if (score >= 70) {
+    return { happened: 'Close match.', next: 'Practice the lowest-scoring section.' }
+  }
+  if (score >= 55) {
+    return { happened: 'Partial match.', next: 'Open a drill and loop the weak spot.' }
+  }
+  return { happened: 'Low match.', next: 'Slow the drill and match arm height first.' }
 }

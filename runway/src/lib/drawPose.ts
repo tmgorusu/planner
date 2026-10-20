@@ -5,46 +5,19 @@ export function drawStageBackdrop(
   ctx: CanvasRenderingContext2D,
   width: number,
   height: number,
-  tint: string,
+  _tint: string,
 ) {
-  const g = ctx.createLinearGradient(0, 0, 0, height)
-  g.addColorStop(0, '#12151f')
-  g.addColorStop(0.55, '#0c0e16')
-  g.addColorStop(1, '#07080d')
-  ctx.fillStyle = g
+  ctx.fillStyle = '#0a0a0c'
   ctx.fillRect(0, 0, width, height)
 
-  // Soft spotlight
-  const spot = ctx.createRadialGradient(
-    width * 0.5,
-    height * 0.28,
-    width * 0.05,
-    width * 0.5,
-    height * 0.35,
-    width * 0.55,
-  )
-  spot.addColorStop(0, tint)
-  spot.addColorStop(1, 'transparent')
-  ctx.fillStyle = spot
-  ctx.fillRect(0, 0, width, height)
-
-  // Floor grid
-  ctx.strokeStyle = 'rgba(255,255,255,0.06)'
+  // Subtle floor line only
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)'
   ctx.lineWidth = 1
-  const horizon = height * 0.62
-  for (let i = 0; i < 8; i++) {
-    const y = horizon + ((height - horizon) * i) / 7
-    ctx.beginPath()
-    ctx.moveTo(0, y)
-    ctx.lineTo(width, y)
-    ctx.stroke()
-  }
-  for (let i = -4; i <= 4; i++) {
-    ctx.beginPath()
-    ctx.moveTo(width * 0.5 + i * width * 0.08, horizon)
-    ctx.lineTo(width * 0.5 + i * width * 0.22, height)
-    ctx.stroke()
-  }
+  const horizon = height * 0.72
+  ctx.beginPath()
+  ctx.moveTo(width * 0.12, horizon)
+  ctx.lineTo(width * 0.88, horizon)
+  ctx.stroke()
 }
 
 export function drawPose(

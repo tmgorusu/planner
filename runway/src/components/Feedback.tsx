@@ -1,4 +1,4 @@
-import { rankTitle, vibeLine, xpForLevel } from '../lib/game'
+import { resultLine, xpForLevel } from '../lib/game'
 import type { AnalysisResult, PlayerStats } from '../lib/types'
 import { StatsBar } from './StatsBar'
 
@@ -21,34 +21,29 @@ export function Feedback({
 }: Props) {
   const weakest = [...analysis.weakMoments].sort((a, b) => a.score - b.score)[0]
   const need = xpForLevel(stats.level)
+  const lines = resultLine(analysis.overallScore)
 
   return (
     <section className="panel feedback-hero">
-      <p className="eyebrow">Run complete</p>
-      <h1 className="brand" style={{ fontSize: '2rem' }}>
-        Nice hit
-      </h1>
+      <p className="eyebrow">Result</p>
       <p className="big-score">{analysis.overallScore}</p>
-      <p className="lede" style={{ margin: '0 auto 0.75rem' }}>
-        {vibeLine(analysis.overallScore)}
-      </p>
+      <p className="state-line">{lines.happened}</p>
       {xpGained > 0 && (
-        <p className="sync-pill" style={{ margin: '0 auto 0.75rem' }}>
-          +{xpGained} XP banked
-          {practicedLabel ? ` · drilled “${practicedLabel}”` : ''}
+        <p className="state-line">
+          +{xpGained} XP
+          {practicedLabel ? ` · practiced ${practicedLabel}` : ''}.
         </p>
       )}
       <StatsBar stats={stats} />
-      <p className="note" style={{ marginTop: '0.9rem' }}>
-        You’re <strong>{rankTitle(stats.level)}</strong> · {stats.xp}/{need} to next level. Next
-        focus: <strong>{weakest?.challenge ?? 'Timing snap'}</strong> — {weakest?.tip}
+      <p className="state-line next" style={{ marginTop: '0.75rem' }}>
+        Next: {weakest?.tip ?? lines.next} ({stats.xp}/{need} XP to level {stats.level + 1})
       </p>
-      <div className="cta-row" style={{ marginTop: '1.25rem' }}>
+      <div className="cta-row" style={{ marginTop: '1rem' }}>
         <button type="button" className="btn btn-primary" onClick={onAgain}>
-          Next challenge
+          Practice next spot
         </button>
         <button type="button" className="btn btn-ghost" onClick={onHome}>
-          New routine
+          Home
         </button>
       </div>
     </section>

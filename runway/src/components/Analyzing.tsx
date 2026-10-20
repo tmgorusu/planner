@@ -4,19 +4,17 @@ type Props = {
 }
 
 export function Analyzing({ progress, message }: Props) {
+  const pct = Math.round(progress * 100)
   return (
     <section className="panel progress-block">
-      <p className="eyebrow">Scanning the floor</p>
-      <h2 className="brand" style={{ fontSize: '2.1rem' }}>
-        Mapping your match
+      <h2 className="brand" style={{ fontSize: '1.5rem' }}>
+        Scoring
       </h2>
-      <p className="lede" style={{ margin: '0 auto' }}>
-        {message}
-      </p>
-      <div className="progress-bar" aria-valuenow={Math.round(progress * 100)}>
-        <i style={{ width: `${Math.round(progress * 100)}%` }} />
+      <p className="state-line">{message}</p>
+      <div className="progress-bar" aria-valuenow={pct}>
+        <i style={{ width: `${pct}%` }} />
       </div>
-      <p className="note">{Math.round(progress * 100)}% · XP loading…</p>
+      <p className="note">{pct}%</p>
     </section>
   )
 }

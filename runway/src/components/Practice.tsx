@@ -57,8 +57,8 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
   return (
     <div className="practice-stage">
       <div className="topbar">
-        <h1 className="brand" style={{ fontSize: '1.35rem' }}>
-          Challenge
+        <h1 className="brand" style={{ fontSize: '1.2rem' }}>
+          Practice
         </h1>
         <button type="button" className="btn btn-ghost" onClick={onBack}>
           Back
@@ -66,16 +66,16 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
       </div>
 
       <section className="panel">
-        <p className="eyebrow">Focus beat · +{moment.xp} XP</p>
-        <h2>{moment.challenge}</h2>
+        <h2>{moment.label}</h2>
         <p className="note">{moment.tip}</p>
+        <p className="state-line">+{moment.xp} XP when you finish one loop.</p>
       </section>
 
       <div className="stage">
         <VideoPane
           src={videos.coachUrl}
           label="Coach"
-          color="#ff5a7a"
+          color="#e84d6a"
           poses={analysis.coachPoses}
           currentTime={time}
           mirrored={mirrored}
@@ -91,8 +91,8 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
         />
         <VideoPane
           src={videos.studentUrl}
-          label="You"
-          color="#3ee0c5"
+          label="Student"
+          color="#2ec4a8"
           poses={analysis.studentPoses}
           currentTime={time}
           mirrored={mirrored}
@@ -104,14 +104,14 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
 
       <div className="controls">
         <button type="button" className="btn btn-primary" onClick={playLoop}>
-          Loop it
+          Loop
         </button>
         <button
           type="button"
           className="btn btn-secondary"
           onClick={() => setMirrored((m) => !m)}
         >
-          {mirrored ? 'Mirrored' : 'Normal'}
+          {mirrored ? 'Mirror on' : 'Mirror off'}
         </button>
         <button
           type="button"
@@ -122,11 +122,10 @@ export function Practice({ videos, analysis, moment, onBack, onDone }: Props) {
         </button>
       </div>
       <p className="note">
-        Loops cleared: <strong>{loops}</strong> / 1 to unlock XP. Feedback after the drill — not
-        live.
+        Loops: {loops}/1
       </p>
       <button type="button" className="btn btn-primary" onClick={onDone} disabled={loops < 1}>
-        {loops < 1 ? 'Clear one loop' : `Bank +${moment.xp} XP`}
+        {loops < 1 ? 'Loop once to continue' : `Finish (+${moment.xp} XP)`}
       </button>
     </div>
   )

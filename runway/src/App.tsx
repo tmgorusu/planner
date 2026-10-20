@@ -67,7 +67,7 @@ export default function App() {
     revokePair(videos)
     setPhase('analyzing')
     setProgress(0.12)
-    setMessage('Loading Mahal sample…')
+    setMessage('Loading Mahal sample.')
 
     const pair: VideoPair = {
       coachUrl: `${import.meta.env.BASE_URL}demo/coach.mp4`,
@@ -80,8 +80,8 @@ export default function App() {
 
     for (let p = 0.2; p <= 0.9; p += 0.14) {
       setProgress(p)
-      setMessage(p < 0.5 ? 'Tracing coach Mahal…' : 'Finding your focus beats…')
-      await new Promise((r) => setTimeout(r, 240))
+      setMessage(p < 0.5 ? 'Reading coach pose.' : 'Comparing student pose.')
+      await new Promise((r) => setTimeout(r, 200))
     }
 
     const result = buildDemoAnalysis(8)
@@ -95,7 +95,7 @@ export default function App() {
     revokePair(videos)
     setPhase('analyzing')
     setProgress(0)
-    setMessage('Loading videos…')
+    setMessage('Loading videos.')
 
     const coachUrl = URL.createObjectURL(coachFile)
     const studentUrl = URL.createObjectURL(studentFile)
@@ -115,17 +115,17 @@ export default function App() {
 
       const duration = Math.min(coachEl.duration || 8, studentEl.duration || 8, 30)
 
-      setMessage('Tracing coach pose (on-device)…')
+      setMessage('Reading coach pose.')
       const coachPoses = await extractPosesFromVideo(coachEl, (p) => {
         setProgress(p * 0.48)
       })
 
-      setMessage('Tracing your pose (on-device)…')
+      setMessage('Reading student pose.')
       const studentPoses = await extractPosesFromVideo(studentEl, (p) => {
         setProgress(0.5 + p * 0.45)
       })
 
-      setMessage('Scoring your run…')
+      setMessage('Comparing poses.')
       const detected =
         coachPoses.some((f) => f.landmarks.length > 0) &&
         studentPoses.some((f) => f.landmarks.length > 0)
@@ -135,8 +135,8 @@ export default function App() {
         : { ...buildDemoAnalysis(Math.max(4, Math.min(duration, 8))), source: 'demo' as const }
 
       if (!detected) {
-        setMessage('No clear person detected — demo-style challenges on your clips.')
-        await new Promise((r) => setTimeout(r, 600))
+        setMessage('No person found. Using sample scoring on your clips.')
+        await new Promise((r) => setTimeout(r, 500))
       }
 
       setAnalysis(result)
@@ -144,7 +144,7 @@ export default function App() {
       setPhase('review')
     } catch (err) {
       console.error(err)
-      setMessage('Analysis failed — loading sample-style feedback.')
+      setMessage('Score failed. Opening sample result.')
       setAnalysis(buildDemoAnalysis(8))
       setProgress(1)
       setPhase('review')
@@ -188,7 +188,7 @@ export default function App() {
             const next = clearDrill(stats, activeMoment.xp)
             persist(next)
             setXpGained(activeMoment.xp)
-            setPracticedLabel(activeMoment.challenge)
+            setPracticedLabel(activeMoment.label)
             setPhase('feedback')
           }}
         />
