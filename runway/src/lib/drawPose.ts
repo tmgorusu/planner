@@ -34,10 +34,8 @@ export function drawPose(
   ctx.lineWidth = Math.max(2.5, width * 0.007)
   ctx.strokeStyle = color
   ctx.fillStyle = color
-  ctx.lineCap = 'round'
-  ctx.lineJoin = 'round'
-  ctx.shadowColor = color
-  ctx.shadowBlur = 10
+  ctx.lineCap = 'butt'
+  ctx.lineJoin = 'miter'
 
   const mapX = (x: number) => (mirror ? 1 - x : x) * width
   const mapY = (y: number) => y * height
@@ -53,7 +51,6 @@ export function drawPose(
     ctx.stroke()
   }
 
-  ctx.shadowBlur = 0
   for (const p of landmarks) {
     if ((p.visibility ?? 1) < 0.35) continue
     ctx.beginPath()
